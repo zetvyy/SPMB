@@ -1,0 +1,72 @@
+body {
+  height: 100vh;
+}
+
+.jumbotron {
+  margin-top: 50px;
+}
+
+.jumbotron h1 {
+  color: #004aad;
+}
+
+.jumbotron h2 {
+  color: #54c5ff;
+}
+
+.logo__stikma {
+  width: 250px;
+  height: 250px;
+}
+
+.logo__spmb {
+  width: 100px;
+  height: 40px;
+}
+
+.navbar {
+  box-shadow: 0 3px 0 0 #004aad;
+}
+
+.button__register {
+  background-color: #004aad;
+  border: none;
+  color: #fff;
+  padding: 10px;
+  border-radius: 10%;
+  text-decoration: none;
+}
+
+.button__register:hover {
+  background-color: #1458af;
+}
+
+.content {
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+.footer {
+  position: relative;
+  top: 100px;
+  border: 3px solid #004aad;
+  padding: 10px;
+  width: 100%;
+}
+
+.logo__footer {
+  width: 120px;
+  height: 50px;
+}
+
+@media screen and (max-width: 400px) {
+  .logo__stikma {
+    width: 100px;
+    height: 100px;
+  }
+
+  .card__features {
+    width: 95vw;
+    margin-bottom: 20px;
+  }
+}

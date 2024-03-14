@@ -1,0 +1,31 @@
+.dashboard {
+  background-color: #e5e5f7;
+  opacity: 0.8;
+  background-image: repeating-radial-gradient(
+      circle at 0 0,
+      transparent 0,
+      #e5e5f7 7px
+    ),
+    repeating-linear-gradient(#54c5ff55, #54c5ff);
+  height: 100vh;
+}
+
+.dashboard__card {
+  position: relative;
+  top: 70px;
+  height: 100vh;
+}
+
+.dashboard__content {
+  text-align: center;
+}
+
+.logout {
+  position: relative;
+}
+
+.button__logout {
+  position: absolute;
+  top: 0;
+  right: 50px;
+}
