@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React from "react";
 import "../styles/dashboard.css";
 import Container from "react-bootstrap/esm/Container";
 import Card from "react-bootstrap/Card";
@@ -6,35 +6,15 @@ import Header from "../components/navbar";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import jwt_decode from "jwt-decode";
+import { Link, useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
-  const [token, setToken] = useState("");
-  const [expire, setExpire] = useState("");
-
   const navigate = useNavigate();
-
-  useEffect(() => {
-    refreshToken();
-  }, []);
-
-  const refreshToken = async () => {
-    try {
-      const response = await axios.get("http://localhost:5050/token");
-      setToken(response.data.payload.datas.accessToken);
-      const decoded = jwt_decode(token);
-      setExpire(decoded.exp);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const Logout = async () => {
     try {
-      await axios.delete("http://localhost:5050/logout");
-      navigate("/login");
+      localStorage.removeItem("token");
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
@@ -74,9 +54,15 @@ const Dashboard = () => {
                     Kadang Anda Merasa Menyukai Kedua Kata Itu, Namun Demikian
                     Anda Harus Tetap Memilih Satu Kata Yang Paling Anda Sukai.
                   </p>
-                  <Button variant="primary" style={{ marginRight: "10px" }}>
-                    Mulai Tes
-                  </Button>
+                  <Link to={"/tes-minat"}>
+                    <Button
+                      variant="primary"
+                      style={{ marginRight: "10px" }}
+                      className="btn__tesminat"
+                    >
+                      Mulai Tes
+                    </Button>
+                  </Link>
                   <Button variant="success"> Lihat Hasil</Button>
                 </Col>
                 <Col xs={12} md={6}>
@@ -99,11 +85,34 @@ const Dashboard = () => {
                     <li>Tes Figural</li>
                   </ol>
 
-                  <Button variant="primary" style={{ marginRight: "10px" }}>
-                    Mulai Tes
-                  </Button>
+                  <Link to={"/tes-bakat"}>
+                    <Button
+                      variant="primary"
+                      style={{ marginRight: "10px" }}
+                      className="btn__tesbakat"
+                    >
+                      Mulai Tes
+                    </Button>
+                  </Link>
                   <Button variant="success"> Lihat Hasil</Button>
                 </Col>
+              </Row>
+              <Row>
+                <h2>Tracking Progress Keahlian</h2>
+                <p>
+                  Fitur lanjutan untuk merekam progres keahlian mahasiswa
+                  sebagai portofolio, sesuai minat bakat mereka sebagai bekal
+                  persiapan terjun ke industri karir.
+                </p>
+                <Link to={"/tracker-progress"}>
+                  <Button
+                    variant="primary"
+                    style={{ marginRight: "10px" }}
+                    className="btn__tesbakat"
+                  >
+                    Coba Fitur Tracking Progress
+                  </Button>
+                </Link>
               </Row>
             </Container>
           </Card>

@@ -30,14 +30,14 @@
   background-color: #1458af;
 }
 
-.input__password {
+.input__password-container {
   position: relative;
 }
 
 .eye__icon {
   position: absolute;
-  top: 75%;
-  right: 25px;
+  top: 50%;
+  right: 10px;
   transform: translateY(-50%);
   font-size: 20px;
   color: #80848d;
@@ -47,7 +47,7 @@
 .eye__iconLogin {
   position: absolute;
   top: 50%;
-  right: 25px;
+  right: 10px;
   transform: translateY(-50%);
   font-size: 20px;
   color: #80848d;

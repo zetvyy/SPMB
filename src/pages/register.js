@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/register.css";
 import Container from "react-bootstrap/esm/Container";
 import Card from "react-bootstrap/Card";
@@ -23,6 +23,17 @@ const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
+  const isAuthenticated = () => {
+    const token = localStorage.getItem("token");
+    return token != null;
+  };
+
+  useEffect(() => {
+    if (isAuthenticated()) {
+      navigate("/dashboard");
+    }
+  }, [navigate]);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const form = event.currentTarget;
@@ -34,16 +45,26 @@ const Register = () => {
 
     try {
       setLoading(true);
-      const response = await axios.post("http://localhost:5050/users", {
-        email: email,
-        password: password,
-        role: role,
-      });
-      setLoading(false);
-      setShowalert(true);
-      setMessage(response.data.payload.message);
-      setAlertType("succes");
-      navigate("/login");
+      const response = await axios.post(
+        "http://localhost:8000/users/register",
+        {
+          email: email,
+          password: password,
+          role: role,
+        }
+      );
+      if (response.data.payload.statusCode === 200) {
+        setLoading(false);
+        setShowalert(true);
+        setMessage(response.data.payload.message);
+        setAlertType("succes");
+        navigate("/login");
+      } else {
+        setShowalert(true);
+        setMessage(response.data.payload.message);
+        setAlertType("error");
+        setLoading(false);
+      }
     } catch (error) {
       if (error.response) {
         setLoading(false);
@@ -96,26 +117,28 @@ const Register = () => {
               controlId="formBasicPassword"
             >
               <Form.Label>Password</Form.Label>
-              <Form.Control
-                required
-                type={showPassword ? "text" : "password"}
-                placeholder="Password"
-                name="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              {showPassword ? (
-                <BsFillEyeFill
-                  className="eye__icon"
-                  onClick={() => setShowPassword(!showPassword)}
+              <div className="input__password-container">
+                <Form.Control
+                  required
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Password"
+                  name="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
-              ) : (
-                <BsFillEyeSlashFill
-                  className="eye__icon"
-                  onClick={() => setShowPassword(!showPassword)}
-                />
-              )}
 
+                {showPassword ? (
+                  <BsFillEyeFill
+                    className="eye__icon"
+                    onClick={() => setShowPassword(!showPassword)}
+                  />
+                ) : (
+                  <BsFillEyeSlashFill
+                    className="eye__icon"
+                    onClick={() => setShowPassword(!showPassword)}
+                  />
+                )}
+              </div>
               <Form.Control.Feedback type="invalid">
                 Harap isi password!
               </Form.Control.Feedback>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Container from "react-bootstrap/esm/Container";
 import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
@@ -22,6 +22,17 @@ const Login = () => {
 
   const navigate = useNavigate();
 
+  const isAuthenticated = () => {
+    const token = localStorage.getItem("token");
+    return token != null;
+  };
+
+  useEffect(() => {
+    if (isAuthenticated()) {
+      navigate("/dashboard");
+    }
+  }, [navigate]);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const form = event.currentTarget;
@@ -34,16 +45,23 @@ const Login = () => {
     try {
       setLoading(true);
 
-      const response = await axios.post("http://localhost:5050/login", {
+      const response = await axios.post("http://localhost:8000/users/login", {
         email: email,
         password: password,
       });
-      setLoading(false);
-      setShowalert(true);
-      setMessage(response.data.payload.message);
-      setAlertType("succes");
-      if (email !== "" && password !== "") {
+
+      if (response.data.payload.statusCode === 200) {
+        setLoading(false);
+        setShowalert(true);
+        setMessage(response.data.payload.message);
+        setAlertType("succes");
+        localStorage.setItem("token", response.data.payload.datas.refreshToken);
         navigate("/dashboard");
+      } else {
+        setShowalert(true);
+        setMessage(response.data.payload.message);
+        setAlertType("error");
+        setLoading(false);
       }
     } catch (error) {
       if (error.response) {
@@ -89,28 +107,32 @@ const Login = () => {
               </Form.Control.Feedback>
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Group
+              className="mb-3 input__password"
+              controlId="formBasicPassword"
+            >
               <Form.Label>Password</Form.Label>
-              <Form.Control
-                type={showPassword ? "text" : "password"}
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                name="password"
-                required
-                className="input__password"
-              />
-              {showPassword ? (
-                <BsFillEyeFill
-                  className="eye__iconLogin"
-                  onClick={() => setShowPassword(!showPassword)}
+              <div className="input__password-container">
+                <Form.Control
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  name="password"
+                  required
                 />
-              ) : (
-                <BsFillEyeSlashFill
-                  className="eye__iconLogin"
-                  onClick={() => setShowPassword(!showPassword)}
-                />
-              )}
+                {showPassword ? (
+                  <BsFillEyeFill
+                    className="eye__iconLogin"
+                    onClick={() => setShowPassword(!showPassword)}
+                  />
+                ) : (
+                  <BsFillEyeSlashFill
+                    className="eye__iconLogin"
+                    onClick={() => setShowPassword(!showPassword)}
+                  />
+                )}
+              </div>
               <Form.Control.Feedback type="invalid">
                 Harap isi password!
               </Form.Control.Feedback>

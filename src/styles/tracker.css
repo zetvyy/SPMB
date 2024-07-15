@@ -1,4 +1,4 @@
-.dashboard {
+.tracker {
   background-color: #e5e5f7;
   opacity: 0.8;
   background-image: repeating-radial-gradient(
@@ -7,35 +7,24 @@
       #e5e5f7 7px
     ),
     repeating-linear-gradient(#54c5ff55, #54c5ff);
-  height: 100vh;
 }
 
-.dashboard__card {
+.tracker__card {
   position: relative;
   top: 70px;
-  height: 100vh;
+  /* height: 100vh; */
 }
 
-.dashboard__content {
-  text-align: center;
-}
-
-.logout {
+.backto__dashboard {
   position: relative;
 }
 
-.button__logout {
+.btn_backto__dashboard {
   position: absolute;
   top: 0;
   right: 50px;
 }
 
-.btn__tesminat {
-  color: white;
-  text-decoration: none;
-}
-
-.btn__tesbakat {
-  color: white;
-  text-decoration: none;
+h2 {
+  color: #004aad;
 }

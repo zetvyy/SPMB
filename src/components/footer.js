@@ -57,7 +57,7 @@ const footer = () => {
                 fontWeight: "bold",
               }}
             >
-              &copy; Copyright Zaidan 2023
+              &copy; Zaidan 2023
             </p>
           </Col>
         </Row>
