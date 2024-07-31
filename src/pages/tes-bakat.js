@@ -14,6 +14,7 @@ const TesBakat = () => {
           frameborder="0"
           marginheight="0"
           marginwidth="0"
+          title="soal-tes-bakat"
         >
           Loading…
         </iframe>
