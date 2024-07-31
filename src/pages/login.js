@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Container from "react-bootstrap/esm/Container";
 import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/button";
+import { Button } from "react-bootstrap";
 import "../styles/register.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";

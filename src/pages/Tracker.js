@@ -5,7 +5,7 @@ import Header from "../components/navbar";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
+import { Button } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Swal from "sweetalert2";
@@ -114,7 +114,7 @@ const Tracker = () => {
         setLoading(false);
         setShowalert(true);
         setMessage(response.data.payload.message);
-        setAlertType("succes");
+        setAlertType("success");
 
         // Update profileData with the new data
         setProfileData({
@@ -149,7 +149,7 @@ const Tracker = () => {
       setLoading(true);
 
       const response = await axios.put(
-        "https://spmb-6143429ca47c.herokuapp.com/tracker/edit-profile",
+        "https://server-spmb.vercel.app/tracker/edit-profile",
         {
           imageUrl: profileImage,
           nama: fullname,
@@ -164,7 +164,7 @@ const Tracker = () => {
         setLoading(false);
         setShowalert(true);
         setMessage(response.data.payload.message);
-        setAlertType("succes");
+        setAlertType("success");
 
         // Update profileData with the new data
         setProfileData({

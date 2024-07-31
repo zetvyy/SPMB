@@ -5,7 +5,7 @@ import Card from "react-bootstrap/Card";
 import Header from "../components/navbar";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
+import { Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
