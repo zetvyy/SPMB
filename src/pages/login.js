@@ -45,10 +45,13 @@ const Login = () => {
     try {
       setLoading(true);
 
-      const response = await axios.post("http://localhost:8000/users/login", {
-        email: email,
-        password: password,
-      });
+      const response = await axios.post(
+        "https://server-spmb.vercel.app/users/login",
+        {
+          email: email,
+          password: password,
+        }
+      );
 
       if (response.data.payload.statusCode === 200) {
         setLoading(false);

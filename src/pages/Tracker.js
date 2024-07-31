@@ -8,16 +8,16 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
-import ListGroup from "react-bootstrap/ListGroup";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import axios from "axios";
+import Project from "../components/project";
+import Topic from "../components/topic";
 
 const Tracker = () => {
   const [showModalProfile, setShowModalProfile] = useState(false);
   const [showModalEditProfile, setShowModalEditProfile] = useState(false);
 
-  const [showModal, setShowModal] = useState(false);
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [showAlert, setShowalert] = useState("");
@@ -46,7 +46,7 @@ const Tracker = () => {
     const fetchProfileData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8000/tracker/profile",
+          "https://server-spmb.vercel.app/tracker/profile",
           {
             headers: { Authorization: `Bearer ${refreshToken}` },
           }
@@ -99,7 +99,7 @@ const Tracker = () => {
       setLoading(true);
 
       const response = await axios.post(
-        "http://localhost:8000/tracker/add-profile",
+        "https://server-spmb.vercel.app/tracker/add-profile",
         {
           imageUrl: profileImage,
           nama: fullname,
@@ -149,7 +149,7 @@ const Tracker = () => {
       setLoading(true);
 
       const response = await axios.put(
-        "http://localhost:8000/tracker/edit-profile",
+        "https://spmb-6143429ca47c.herokuapp.com/tracker/edit-profile",
         {
           imageUrl: profileImage,
           nama: fullname,
@@ -475,107 +475,9 @@ const Tracker = () => {
               </Col>
             </Row>
 
-            <h2>My Project List</h2>
-            <Row>
-              <Col md={6}>
-                <Card className="mb-3">
-                  <Row>
-                    <Col md={4}>
-                      <img
-                        src="https://via.placeholder.com/150"
-                        alt="Pproject 1"
-                        style={{
-                          width: "100%",
-                          height: "auto",
-                        }}
-                      />
-                    </Col>
-                    <Col md={8}>
-                      <Card.Body>
-                        <Card.Title>Project 1</Card.Title>
-                        <Card.Text>
-                          Ini adalah deskripsi dari Project 1. Project ini
-                          melibatkan pengembangan aplikasi dengan React.
-                        </Card.Text>
-                      </Card.Body>
-                    </Col>
-                  </Row>
-                </Card>
-              </Col>
-              <Col md={6}>
-                <Card className="mb-3">
-                  <Row>
-                    <Col md={4}>
-                      <img
-                        src="https://via.placeholder.com/150"
-                        alt="Pproject 2"
-                        style={{
-                          width: "100%",
-                          height: "auto",
-                        }}
-                      />
-                    </Col>
-                    <Col md={8}>
-                      <Card.Body>
-                        <Card.Title>Project 2</Card.Title>
-                        <Card.Text>
-                          Deskripsi dari Project 2 di sini. Project ini fokus
-                          pada pengembangan backend menggunakan Node.js.
-                        </Card.Text>
-                      </Card.Body>
-                    </Col>
-                  </Row>
-                </Card>
-              </Col>
-            </Row>
+            <Project />
 
-            <Row>
-              <Col md={12}>
-                <Card className="mb-3">
-                  <Card.Body>
-                    <Card.Title>Hasil Belajar Minggu Ini</Card.Title>
-                    <ListGroup>
-                      <ListGroup.Item>React Hooks dan Komponen</ListGroup.Item>
-                      <ListGroup.Item>Asynchronous JavaScript</ListGroup.Item>
-                      <ListGroup.Item>
-                        State Management dengan Redux
-                      </ListGroup.Item>
-                    </ListGroup>
-                    <Button
-                      variant="primary"
-                      className="mt-3"
-                      onClick={() => setShowModal(true)}
-                    >
-                      +
-                    </Button>
-                    <Modal show={showModal} onHide={() => setShowModal(false)}>
-                      <Modal.Header closeButton>
-                        <Modal.Title>Tambah Hasil Belajar</Modal.Title>
-                      </Modal.Header>
-                      <Modal.Body>
-                        <Form>
-                          <Form.Group>
-                            <Form.Label>Topik Belajar</Form.Label>
-                            <Form.Control
-                              type="text"
-                              placeholder="Masukkan topik yang dipelajari"
-                              className="mb-3"
-                            />
-                          </Form.Group>
-                          <Button
-                            variant="primary"
-                            type="submit"
-                            onClick={() => setShowModal(false)}
-                          >
-                            Tambahkan
-                          </Button>
-                        </Form>
-                      </Modal.Body>
-                    </Modal>
-                  </Card.Body>
-                </Card>
-              </Col>
-            </Row>
+            <Topic />
 
             <Row>
               <Col>

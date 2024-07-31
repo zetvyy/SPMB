@@ -46,7 +46,7 @@ const Register = () => {
     try {
       setLoading(true);
       const response = await axios.post(
-        "http://localhost:8000/users/register",
+        "https://server-spmb.vercel.app/users/register",
         {
           email: email,
           password: password,
