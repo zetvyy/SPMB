@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import "../styles/dashboard.css";
 import Container from "react-bootstrap/esm/Container";
@@ -11,6 +11,16 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const isAuthenticated = () => {
+    const token = localStorage.getItem("token");
+    return token != null;
+  };
+
+  useEffect(() => {
+    if (isAuthenticated()) {
+      navigate("/dashboard");
+    }
+  }, [navigate]);
 
   const Logout = async () => {
     try {

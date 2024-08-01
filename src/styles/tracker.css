@@ -35,7 +35,7 @@ h2 {
     top: 0;
     right: 10px;
   }
-  .profile {
-    margin: 20px 0;
+  .profile-image {
+    align-items: center;
   }
 }
