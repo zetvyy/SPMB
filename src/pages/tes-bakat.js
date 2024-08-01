@@ -1,10 +1,16 @@
 import React from "react";
+import { Helmet } from "react-helmet";
+
 import Container from "react-bootstrap/esm/Container";
 import Header from "../components/navbar";
 
 const TesBakat = () => {
   return (
     <>
+      <Helmet>
+        <title>SPMB | Tes Bakat</title>
+        <meta property="og:title" content="Landing Page" />
+      </Helmet>
       <Header />
       <Container>
         <iframe

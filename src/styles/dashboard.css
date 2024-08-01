@@ -39,3 +39,14 @@
   color: white;
   text-decoration: none;
 }
+
+@media (max-width: 768px) {
+  .button__logout {
+    position: absolute;
+    top: 0;
+    right: 10px;
+  }
+  /* .dashboard__content {
+    margin: 10px 0;
+  } */
+}

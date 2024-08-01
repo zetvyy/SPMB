@@ -119,7 +119,9 @@ const Topic = () => {
         <Col md={12}>
           <Card className="mb-3">
             <Card.Body>
-              <Card.Title>Hasil Belajar Minggu Ini</Card.Title>
+              <Card.Title style={{ color: "#004aad" }}>
+                Hasil Belajar Minggu Ini
+              </Card.Title>
               {topicData.map((topic, index) => (
                 <ListGroup>
                   <ListGroup.Item key={index}>

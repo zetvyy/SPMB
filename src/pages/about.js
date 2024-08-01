@@ -1,4 +1,6 @@
 import React from "react";
+import { Helmet } from "react-helmet";
+
 import { Container } from "react-bootstrap";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
@@ -10,6 +12,10 @@ import stikmakampus from "../assets/img/stikmakampus.jpg";
 const About = () => {
   return (
     <div>
+      <Helmet>
+        <title>SPMB | About</title>
+        <meta property="og:title" content="Landing Page" />
+      </Helmet>
       <Header />
       <Container>
         <h1 className="mt-3 text-center" style={{ color: "#004aad" }}>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Helmet } from "react-helmet";
 import "../styles/register.css";
 import Container from "react-bootstrap/esm/Container";
 import Card from "react-bootstrap/Card";
@@ -77,6 +78,10 @@ const Register = () => {
 
   return (
     <div className="register__content">
+      <Helmet>
+        <title>SPMB | Register</title>
+        <meta property="og:title" content="Landing Page" />
+      </Helmet>
       {loading && (
         <div className="loading-overlay">
           <div className="loading-spinner" />

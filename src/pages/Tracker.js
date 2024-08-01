@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { Helmet } from "react-helmet";
+
 import "../styles/tracker.css";
 import Container from "react-bootstrap/esm/Container";
 import Header from "../components/navbar";
@@ -38,6 +40,9 @@ const Tracker = () => {
     keahlian: "",
   });
 
+  const [projectCount, setProjectCount] = useState(0);
+  const [topicCount, setTopicCount] = useState(0);
+
   useEffect(() => {
     const refreshToken = localStorage.getItem("token");
     if (refreshToken) {
@@ -72,6 +77,39 @@ const Tracker = () => {
       setProfileImage(profileData.imageUrl);
     }
   }, [profileData]);
+
+  useEffect(() => {
+    const fetchCounts = async () => {
+      try {
+        const projectResponse = await axios.get(
+          "https://server-spmb.vercel.app/tracker/project",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        const topicResponse = await axios.get(
+          "https://server-spmb.vercel.app/tracker/topic",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+
+        if (projectResponse.data.payload.statusCode === 200) {
+          setProjectCount(projectResponse.data.payload.datas.length);
+        }
+
+        if (topicResponse.data.payload.statusCode === 200) {
+          setTopicCount(topicResponse.data.payload.datas.length);
+        }
+      } catch (error) {
+        console.error("Error fetching counts", error);
+      }
+    };
+
+    if (token) {
+      fetchCounts();
+    }
+  }, [token]);
 
   const handleUploadImage = (e) => {
     const file = e.target.files[0];
@@ -194,6 +232,10 @@ const Tracker = () => {
 
   return (
     <>
+      <Helmet>
+        <title>SPMB | Tracker</title>
+        <meta property="og:title" content="Landing Page" />
+      </Helmet>
       <Header />
       <div className="tracker">
         {loading && (
@@ -221,12 +263,12 @@ const Tracker = () => {
                   href="/dashboard"
                   className="btn_backto__dashboard"
                 >
-                  Kembali ke Dashboard
+                  Dashboard
                 </Button>
               </Col>
             </Row>
             <Row>
-              <h2>Profile</h2>
+              <h2 style={{ color: "#004aad" }}>Profile</h2>
 
               <Col className="text-center" md={4}>
                 <div className="profile-image">
@@ -263,10 +305,32 @@ const Tracker = () => {
               </Col>
               <Col md={8}>
                 <div className="user-details">
-                  <p>Nama Lengkap: {profileData.nama} </p>
-                  <p>Jurusan: {profileData.jurusan}</p>
-                  <p>Peminatan: {profileData.peminatan} </p>
-                  <p>Daftar Keahlian: {profileData.keahlian} </p>
+                  <p>
+                    {" "}
+                    <span style={{ color: "#004aad", fontWeight: "bold" }}>
+                      {" "}
+                      Nama Lengkap:{" "}
+                    </span>{" "}
+                    {profileData.nama}{" "}
+                  </p>
+                  <p>
+                    <span style={{ color: "#004aad", fontWeight: "bold" }}>
+                      Jurusan:
+                    </span>{" "}
+                    {profileData.jurusan}
+                  </p>
+                  <p>
+                    <span style={{ color: "#004aad", fontWeight: "bold" }}>
+                      Peminatan:{" "}
+                    </span>
+                    {profileData.peminatan}{" "}
+                  </p>
+                  <p>
+                    <span style={{ color: "#004aad", fontWeight: "bold" }}>
+                      Daftar Keahlian:
+                    </span>{" "}
+                    {profileData.keahlian}{" "}
+                  </p>
                 </div>
                 <Button
                   variant="primary"
@@ -283,6 +347,7 @@ const Tracker = () => {
                 >
                   Edit Profile
                 </Button>
+
                 {/* Modal Add Profile */}
                 <Modal
                   show={showModalProfile}
@@ -482,12 +547,22 @@ const Tracker = () => {
             <Row>
               <Col>
                 <Card>
-                  <h2>Jumlah Projek</h2>
+                  <h2 style={{ color: "#004aad", textAlign: "center" }}>
+                    Jumlah Projek
+                  </h2>
+                  <h3 style={{ textAlign: "center", color: "blue" }}>
+                    {projectCount}
+                  </h3>
                 </Card>
               </Col>
               <Col>
                 <Card>
-                  <h2>Jumlah Topik yang sudah dipelajari</h2>
+                  <h2 style={{ color: "#004aad", textAlign: "center" }}>
+                    Jumlah Topik yang sudah dipelajari
+                  </h2>
+                  <h3 style={{ textAlign: "center", color: "blue" }}>
+                    {topicCount}
+                  </h3>
                 </Card>
               </Col>
             </Row>

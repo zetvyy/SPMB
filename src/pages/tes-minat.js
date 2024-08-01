@@ -1,10 +1,16 @@
 import React from "react";
+import { Helmet } from "react-helmet";
+
 import Container from "react-bootstrap/esm/Container";
 import Header from "../components/navbar";
 
 const TesMinat = () => {
   return (
     <>
+      <Helmet>
+        <title>SPMB | Tes Minat</title>
+        <meta property="og:title" content="Landing Page" />
+      </Helmet>
       <Header />
       <Container
         classname="d-flex justify-content-center align-items-center"

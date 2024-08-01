@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import "../styles/dashboard.css";
 import Container from "react-bootstrap/esm/Container";
 import Card from "react-bootstrap/Card";
@@ -22,6 +23,10 @@ const Dashboard = () => {
 
   return (
     <>
+      <Helmet>
+        <title>SPMB | Dashboard</title>
+        <meta property="og:title" content="Landing Page" />
+      </Helmet>
       <Header />
       <div className="dashboard">
         <Container>

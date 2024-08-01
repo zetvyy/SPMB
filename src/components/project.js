@@ -131,7 +131,7 @@ const Project = () => {
           showConfirmButton: false,
           onClose: setShowalert(false),
         })}
-      <h2>My Project List</h2>
+      <h2 style={{ color: "#004aad", marginTop: "20px" }}>My Project List</h2>
       <Button
         variant="primary"
         onClick={() => setShowModal(true)}
