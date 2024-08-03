@@ -17,15 +17,17 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    if (isAuthenticated()) {
-      navigate("/dashboard");
+    if (!isAuthenticated()) {
+      navigate("/login");
     }
   }, [navigate]);
 
   const Logout = async () => {
     try {
       localStorage.removeItem("token");
-      navigate("/");
+      setTimeout(() => {
+        navigate("/");
+      }, 5000);
     } catch (error) {
       console.log(error);
     }

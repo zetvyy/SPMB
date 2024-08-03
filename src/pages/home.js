@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import { Helmet } from "react-helmet";
 
@@ -10,24 +10,10 @@ import Col from "react-bootstrap/Col";
 import Logo from "../assets/img/stikma.png";
 import Card from "react-bootstrap/Card";
 import Footer from "../components/footer";
-import { useNavigate } from "react-router-dom";
 import feature1 from "../assets/img/features1.svg";
 import feature2 from "../assets/img/feature2.svg";
 
 const Home = (props) => {
-  const navigate = useNavigate();
-
-  const isAuthenticated = () => {
-    const token = localStorage.getItem("token");
-    return token != null;
-  };
-
-  useEffect(() => {
-    if (isAuthenticated()) {
-      navigate("/dashboard");
-    }
-  }, [navigate]);
-
   return (
     <div className="home-container">
       <Helmet>
