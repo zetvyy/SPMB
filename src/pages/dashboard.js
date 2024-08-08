@@ -80,7 +80,9 @@ const Dashboard = () => {
                       Mulai Tes
                     </Button>
                   </Link>
-                  <Button variant="success"> Lihat Hasil</Button>
+                  <Link to={"/hasil-tes-minat"}>
+                    <Button variant="success"> Lihat Hasil</Button>
+                  </Link>
                 </Col>
                 <Col xs={12} md={6}>
                   <h2>Tes Bakat</h2>
@@ -127,7 +129,7 @@ const Dashboard = () => {
                     style={{ marginRight: "10px" }}
                     className="btn__tesbakat"
                   >
-                    Coba Fitur Tracking Progress
+                    Tracker Progress
                   </Button>
                 </Link>
               </Row>

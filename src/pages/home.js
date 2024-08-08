@@ -1,7 +1,6 @@
-import React from "react";
-
+import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
-
+import { useNavigate } from "react-router-dom";
 import "../styles/home.css";
 import Header from "../components/navbar";
 import Container from "react-bootstrap/esm/Container";
@@ -14,6 +13,17 @@ import feature1 from "../assets/img/features1.svg";
 import feature2 from "../assets/img/feature2.svg";
 
 const Home = (props) => {
+  const navigate = useNavigate();
+  const isAuthenticated = () => {
+    const token = localStorage.getItem("token");
+    return token != null;
+  };
+
+  useEffect(() => {
+    if (isAuthenticated()) {
+      navigate("/dashboard");
+    }
+  }, [navigate]);
   return (
     <div className="home-container">
       <Helmet>

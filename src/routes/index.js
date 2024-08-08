@@ -9,6 +9,7 @@ import TesBakat from "../pages/tes-bakat";
 import Tracker from "../pages/Tracker";
 import About from "../pages/about";
 import ProtectedRoute from "../components/ProtectedRoute";
+import TesMinatResult from "../pages/TesMinatResult";
 
 const RoutesPath = () => {
   return (
@@ -32,6 +33,14 @@ const RoutesPath = () => {
           element={
             <ProtectedRoute>
               <TesMinat />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/hasil-tes-minat"
+          element={
+            <ProtectedRoute>
+              <TesMinatResult />
             </ProtectedRoute>
           }
         />
